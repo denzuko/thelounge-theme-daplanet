@@ -491,7 +491,56 @@ a:hover { color: #fff !important; text-decoration: underline !important; }
 
 .context-menu li.divider { border-top: 1px solid var(--border) !important; }
 
-/* ── CONNECT WINDOW ──────────────────────────────────────────────────── */
+/* ── ABOUT WINDOW ────────────────────────────────────────────────────── */
+.about {
+  background: var(--dim) !important;
+  color: var(--text) !important;
+  font-family: var(--font-mono) !important;
+  padding: 1rem !important;
+}
+
+.about p {
+  color: var(--text) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.78rem !important;
+}
+
+.about a {
+  color: var(--green) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.05em !important;
+  border-bottom: 1px dashed rgba(57,255,20,0.3) !important;
+  text-decoration: none !important;
+}
+
+.about a:hover {
+  color: #fff !important;
+  border-bottom-color: var(--green) !important;
+}
+
+#version-checker {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.72rem !important;
+  padding: 0.5rem 0.75rem !important;
+  margin-bottom: 1rem !important;
+}
+
+#version-checker.up-to-date {
+  border-color: var(--green2) !important;
+  color: var(--green) !important;
+}
+
+#version-checker.up-to-date p {
+  color: var(--green) !important;
+}
+
+#version-checker.outdated {
+  border-color: var(--amber) !important;
+  color: var(--amber) !important;
+}
 #connect.window,
 #connect .container {
   background: var(--dim) !important;
