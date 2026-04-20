@@ -233,6 +233,12 @@ a:hover { color: #fff !important; text-decoration: underline !important; }
   font-family: var(--font-mono) !important;
 }
 
+/* All child spans inside message text — irc-bold, irc-fg*, inline-channel etc */
+.msg .content .text span,
+.content .text span {
+  background: transparent !important;
+}
+
 /* MOTD — each line is a msg row; span.text holds the ASCII art */
 #chat .msg[data-type="motd"],
 #chat .msg[data-type="motd"] .text,
@@ -287,10 +293,20 @@ a:hover { color: #fff !important; text-decoration: underline !important; }
 
 .msg .content,
 .msg .text {
+  background: transparent !important;
   color: var(--text-dim) !important;
   font-family: var(--font-mono) !important;
   font-size: 0.82rem !important;
   line-height: 1.5 !important;
+}
+
+/* span.content > span.text — MOTD and other multi-span messages */
+.msg .content .text,
+.content .text {
+  background: transparent !important;
+  color: var(--text-dim) !important;
+  font-family: var(--font-mono) !important;
+  white-space: pre-wrap !important;
 }
 
 /* Highlight row */
