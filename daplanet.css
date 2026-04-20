@@ -233,10 +233,25 @@ a:hover { color: #fff !important; text-decoration: underline !important; }
   font-family: var(--font-mono) !important;
 }
 
-/* MOTD pre block */
-.window pre,
+/* MOTD — each line is a msg row; span.text holds the ASCII art */
+#chat .msg[data-type="motd"],
 #chat .msg[data-type="motd"] .text,
 #chat .msg[data-type="motd"] .content {
+  background: var(--dim) !important;
+  color: var(--text-dim) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.75rem !important;
+  white-space: pre !important;
+  border: none !important;
+}
+
+/* MOTD IRC formatting spans — keep colours but fix backgrounds */
+#chat .msg[data-type="motd"] span {
+  background: transparent !important;
+}
+
+/* pre blocks in window views */
+.window pre {
   background: var(--panel) !important;
   border: 1px solid var(--border) !important;
   color: var(--text-dim) !important;
