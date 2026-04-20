@@ -1,9 +1,12 @@
 {
   "name": "thelounge-theme-daplanet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Da Planet Radio / Da Planet Security theme for TheLounge — matches klaxon.dapla.net icecast2 status page aesthetic",
+  "main": "package.json",
   "keywords": ["thelounge", "thelounge-theme"],
   "thelounge": {
+    "name": "Da Planet",
+    "type": "theme",
     "css": "daplanet.css"
   },
   "license": "MIT"
