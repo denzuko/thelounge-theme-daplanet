@@ -397,6 +397,7 @@ a:hover { color: #fff !important; text-decoration: underline !important; }
 
 #input::placeholder { color: var(--muted) !important; }
 
+#nick,
 .nick {
   background: var(--dim) !important;
   color: var(--amber) !important;
@@ -405,6 +406,9 @@ a:hover { color: #fff !important; text-decoration: underline !important; }
   border-right: 1px solid var(--border) !important;
 }
 
+#upload,
+#submit,
+#emote-picker-btn,
 #form .btn {
   background: var(--dim) !important;
   border: 1px solid var(--border) !important;
@@ -413,6 +417,9 @@ a:hover { color: #fff !important; text-decoration: underline !important; }
   transition: all 0.15s !important;
 }
 
+#upload:hover,
+#submit:hover,
+#emote-picker-btn:hover,
 #form .btn:hover {
   border-color: var(--green2) !important;
   color: var(--green) !important;
