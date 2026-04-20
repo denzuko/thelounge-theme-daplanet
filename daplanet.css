@@ -1,0 +1,556 @@
+/*
+ * thelounge-theme-daplanet
+ * Da Planet Security / Da Planet Radio
+ * Matches the klaxon.dapla.net icecast2 status page design system:
+ *   Orbitron display font, Rajdhani body font
+ *   Deep navy/cyber palette with electric blue glow accents
+ *
+ * Install: drop in $THELOUNGE_HOME/packages/node_modules/
+ *          and add to packages/package.json dependencies
+ */
+
+/* ── GOOGLE FONTS ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+/* ── DESIGN TOKENS ────────────────────────────────────────────────────────── */
+:root {
+  --dp-deep:       #030a14;
+  --dp-dark:       #0a1628;
+  --dp-navy:       #0f2847;
+  --dp-blue:       #1a4a7a;
+  --dp-accent:     #2d7dd2;
+  --dp-glow:       #4a9eff;
+  --dp-highlight:  #7ec8ff;
+  --dp-cyber:      #00f0ff;
+  --dp-green:      #00ff9d;
+  --dp-red:        #ff3c5a;
+  --dp-orange:     #ff7b2c;
+  --dp-muted:      #4a6080;
+  --dp-border:     rgba(45, 125, 210, 0.25);
+  --dp-border-hi:  rgba(0, 240, 255, 0.5);
+  --dp-glow-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+  --dp-glow-strong: 0 0 16px rgba(0, 240, 255, 0.5);
+
+  --font-display: 'Orbitron', 'Courier New', monospace;
+  --font-body:    'Rajdhani', 'Helvetica Neue', sans-serif;
+  --font-mono:    'Courier New', monospace;
+}
+
+/* ── GLOBAL RESET TO PALETTE ────────────────────────────────────────────── */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+#app {
+  background: var(--dp-deep) !important;
+  color: var(--dp-highlight) !important;
+  font-family: var(--font-body) !important;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ── SIDEBAR ────────────────────────────────────────────────────────────── */
+#sidebar {
+  background: var(--dp-dark) !important;
+  border-right: 1px solid var(--dp-border) !important;
+}
+
+/* Network / channel headers */
+.sidebar-network .header {
+  background: var(--dp-navy) !important;
+  border-bottom: 1px solid var(--dp-border) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.65rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--dp-cyber) !important;
+}
+
+.sidebar-network .header:hover {
+  background: var(--dp-blue) !important;
+}
+
+/* Channel list items */
+.channel-list-item,
+.channel-list-item a {
+  color: var(--dp-highlight) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+  border-left: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.channel-list-item:hover,
+.channel-list-item a:hover {
+  background: rgba(45, 125, 210, 0.15) !important;
+  color: var(--dp-cyber) !important;
+  border-left-color: var(--dp-accent);
+}
+
+.channel-list-item.active,
+.channel-list-item.active a {
+  background: rgba(0, 240, 255, 0.08) !important;
+  color: var(--dp-cyber) !important;
+  border-left-color: var(--dp-cyber);
+  box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.05);
+}
+
+/* Unread badges */
+.badge {
+  background: var(--dp-accent) !important;
+  color: var(--dp-deep) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.55rem !important;
+  font-weight: 700 !important;
+}
+
+/* Highlight / mention badge */
+.badge.highlight,
+.channel-list-item.highlight .badge {
+  background: var(--dp-cyber) !important;
+  box-shadow: var(--dp-glow-shadow) !important;
+  color: var(--dp-deep) !important;
+}
+
+/* ── TOPBAR ─────────────────────────────────────────────────────────────── */
+#viewport .header {
+  background: var(--dp-navy) !important;
+  border-bottom: 1px solid var(--dp-border) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.08em !important;
+  color: var(--dp-cyber) !important;
+}
+
+#viewport .header .topic {
+  color: var(--dp-muted) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+#viewport .header .topic a {
+  color: var(--dp-glow) !important;
+  text-decoration: none !important;
+  border-bottom: 1px dashed var(--dp-border);
+}
+
+#viewport .header .topic a:hover {
+  color: var(--dp-cyber) !important;
+  border-bottom-color: var(--dp-cyber);
+  text-shadow: var(--dp-glow-shadow);
+}
+
+/* ── CHAT WINDOW ────────────────────────────────────────────────────────── */
+#chat {
+  background: var(--dp-deep) !important;
+}
+
+/* Scanline texture overlay */
+#chat::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Message rows */
+.msg {
+  border-bottom: 1px solid rgba(10, 22, 40, 0.5) !important;
+  transition: background 0.1s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.msg:hover {
+  background: rgba(15, 40, 71, 0.4) !important;
+}
+
+/* Timestamp */
+.msg .time {
+  color: var(--dp-muted) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.72rem !important;
+}
+
+/* Nick */
+.msg .from {
+  font-family: var(--font-body) !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+}
+
+/* Content / text */
+.msg .content,
+.msg .text {
+  color: var(--dp-highlight) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.95rem !important;
+}
+
+/* Highlight (mentioned) row */
+.msg.highlight {
+  background: rgba(0, 240, 255, 0.05) !important;
+  border-left: 3px solid var(--dp-cyber) !important;
+  box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.03) !important;
+}
+
+/* Self messages */
+.msg.self .from {
+  color: var(--dp-accent) !important;
+}
+
+/* Action (/me) */
+.msg.action .text {
+  color: var(--dp-glow) !important;
+  font-style: italic !important;
+}
+
+/* Links */
+.msg a,
+.content a {
+  color: var(--dp-glow) !important;
+  text-decoration: none !important;
+  border-bottom: 1px dashed rgba(74, 158, 255, 0.4);
+  transition: all 0.15s ease;
+}
+
+.msg a:hover,
+.content a:hover {
+  color: var(--dp-cyber) !important;
+  border-bottom-color: var(--dp-cyber);
+  text-shadow: var(--dp-glow-shadow);
+}
+
+/* Inline images / link previews */
+.preview {
+  border: 1px solid var(--dp-border) !important;
+  border-radius: 2px !important;
+  background: var(--dp-dark) !important;
+}
+
+/* ── NICK COLOURS ───────────────────────────────────────────────────────── */
+/* Override TheLounge's default rainbow with palette-coherent colours */
+.color-1  { color: #4a9eff !important; }
+.color-2  { color: #00f0ff !important; }
+.color-3  { color: #00ff9d !important; }
+.color-4  { color: #7ec8ff !important; }
+.color-5  { color: #2d7dd2 !important; }
+.color-6  { color: #5bc0de !important; }
+.color-7  { color: #a0cfff !important; }
+.color-8  { color: #00bcd4 !important; }
+.color-9  { color: #26c6da !important; }
+.color-10 { color: #80deea !important; }
+.color-11 { color: #b2ebf2 !important; }
+.color-12 { color: #e0f7fa !important; }
+.color-13 { color: #64b5f6 !important; }
+.color-14 { color: #42a5f5 !important; }
+.color-15 { color: #1e88e5 !important; }
+.color-16 { color: #1565c0 !important; }
+
+/* ── STATUS / SYSTEM MESSAGES ──────────────────────────────────────────── */
+.msg.status .content,
+.msg.network .text {
+  color: var(--dp-muted) !important;
+  font-style: italic;
+  font-size: 0.85rem !important;
+}
+
+.msg.error .text {
+  color: var(--dp-red) !important;
+}
+
+.msg.notice .text {
+  color: var(--dp-orange) !important;
+}
+
+/* Join / part / quit */
+.msg.join .text   { color: rgba(0, 255, 157, 0.6) !important; font-size: 0.82rem !important; }
+.msg.part .text   { color: rgba(74, 96, 128, 0.8) !important; font-size: 0.82rem !important; }
+.msg.quit .text   { color: rgba(74, 96, 128, 0.8) !important; font-size: 0.82rem !important; }
+.msg.kick .text   { color: var(--dp-red) !important; font-size: 0.82rem !important; }
+.msg.mode .text   { color: rgba(45, 125, 210, 0.7) !important; font-size: 0.82rem !important; }
+.msg.topic .text  { color: var(--dp-glow) !important; font-size: 0.82rem !important; }
+
+/* ── INPUT BAR ──────────────────────────────────────────────────────────── */
+#form {
+  background: var(--dp-dark) !important;
+  border-top: 1px solid var(--dp-border) !important;
+}
+
+#input {
+  background: var(--dp-navy) !important;
+  border: 1px solid var(--dp-border) !important;
+  border-radius: 2px !important;
+  color: var(--dp-highlight) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.95rem !important;
+  caret-color: var(--dp-cyber);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#input:focus {
+  border-color: var(--dp-cyber) !important;
+  box-shadow: var(--dp-glow-shadow) !important;
+  outline: none !important;
+}
+
+#input::placeholder {
+  color: var(--dp-muted) !important;
+}
+
+/* Nick autocomplete / tab-complete */
+.autocomplete-container {
+  background: var(--dp-navy) !important;
+  border: 1px solid var(--dp-border-hi) !important;
+  box-shadow: var(--dp-glow-strong) !important;
+}
+
+.autocomplete-item {
+  color: var(--dp-highlight) !important;
+  font-family: var(--font-body) !important;
+}
+
+.autocomplete-item.active,
+.autocomplete-item:hover {
+  background: var(--dp-blue) !important;
+  color: var(--dp-cyber) !important;
+}
+
+/* ── USER LIST (RIGHT PANEL) ────────────────────────────────────────────── */
+#chat-container .userlist,
+.userlist {
+  background: var(--dp-dark) !important;
+  border-left: 1px solid var(--dp-border) !important;
+}
+
+.userlist .header {
+  background: var(--dp-navy) !important;
+  border-bottom: 1px solid var(--dp-border) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.6rem !important;
+  letter-spacing: 0.12em !important;
+  color: var(--dp-cyber) !important;
+  text-transform: uppercase !important;
+}
+
+.userlist .user {
+  color: var(--dp-highlight) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.88rem !important;
+  transition: color 0.1s ease;
+}
+
+.userlist .user:hover {
+  color: var(--dp-cyber) !important;
+}
+
+/* Op / voice prefixes */
+.userlist .user .prefix {
+  color: var(--dp-accent) !important;
+  font-weight: 700;
+}
+
+/* ── SETTINGS / OVERLAY PANELS ──────────────────────────────────────────── */
+.window {
+  background: var(--dp-dark) !important;
+  color: var(--dp-highlight) !important;
+}
+
+.window .header {
+  background: var(--dp-navy) !important;
+  border-bottom: 1px solid var(--dp-border) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: var(--dp-cyber) !important;
+}
+
+.window input[type="text"],
+.window input[type="password"],
+.window input[type="email"],
+.window select,
+.window textarea {
+  background: var(--dp-navy) !important;
+  border: 1px solid var(--dp-border) !important;
+  border-radius: 2px !important;
+  color: var(--dp-highlight) !important;
+  font-family: var(--font-body) !important;
+}
+
+.window input:focus,
+.window select:focus,
+.window textarea:focus {
+  border-color: var(--dp-cyber) !important;
+  box-shadow: var(--dp-glow-shadow) !important;
+  outline: none !important;
+}
+
+/* Buttons */
+.btn,
+button,
+.window .btn {
+  background: var(--dp-blue) !important;
+  border: 1px solid var(--dp-accent) !important;
+  border-radius: 2px !important;
+  color: var(--dp-highlight) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.6rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn:hover,
+button:hover,
+.window .btn:hover {
+  background: var(--dp-accent) !important;
+  border-color: var(--dp-cyber) !important;
+  color: var(--dp-deep) !important;
+  box-shadow: var(--dp-glow-shadow) !important;
+}
+
+.btn-primary,
+.btn.btn-primary {
+  background: var(--dp-accent) !important;
+  border-color: var(--dp-cyber) !important;
+  color: var(--dp-deep) !important;
+}
+
+.btn-primary:hover {
+  box-shadow: var(--dp-glow-strong) !important;
+}
+
+/* ── SCROLLBARS ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dp-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dp-blue);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dp-accent);
+}
+
+/* ── CONTEXT MENU ───────────────────────────────────────────────────────── */
+.context-menu {
+  background: var(--dp-navy) !important;
+  border: 1px solid var(--dp-border-hi) !important;
+  box-shadow: var(--dp-glow-strong), 0 8px 32px rgba(0,0,0,0.6) !important;
+  border-radius: 2px !important;
+}
+
+.context-menu li a,
+.context-menu li button {
+  color: var(--dp-highlight) !important;
+  font-family: var(--font-body) !important;
+  font-size: 0.9rem !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.context-menu li a:hover,
+.context-menu li button:hover {
+  background: var(--dp-blue) !important;
+  color: var(--dp-cyber) !important;
+}
+
+.context-menu li.divider {
+  border-top: 1px solid var(--dp-border) !important;
+}
+
+/* ── NOTIFICATIONS / TOASTS ─────────────────────────────────────────────── */
+.notification {
+  background: var(--dp-navy) !important;
+  border: 1px solid var(--dp-border-hi) !important;
+  border-left: 3px solid var(--dp-cyber) !important;
+  color: var(--dp-highlight) !important;
+  box-shadow: var(--dp-glow-shadow) !important;
+}
+
+/* ── LOADING / CONNECTING STATES ────────────────────────────────────────── */
+.loading {
+  background: var(--dp-deep) !important;
+  color: var(--dp-muted) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+}
+
+/* ── INLINE CODE / PRE ──────────────────────────────────────────────────── */
+code,
+pre {
+  background: var(--dp-navy) !important;
+  border: 1px solid var(--dp-border) !important;
+  border-radius: 2px !important;
+  color: var(--dp-green) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.85em !important;
+}
+
+/* ── WEBCAL BUTTON (from thelounge-plugin-webcal) ───────────────────────── */
+a.webcal-link {
+  background: var(--dp-blue) !important;
+  border: 1px solid var(--dp-accent) !important;
+  color: var(--dp-cyber) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.6rem !important;
+  letter-spacing: 0.08em !important;
+  box-shadow: none !important;
+  transition: all 0.15s ease !important;
+}
+
+a.webcal-link:hover {
+  background: var(--dp-accent) !important;
+  border-color: var(--dp-cyber) !important;
+  color: var(--dp-deep) !important;
+  box-shadow: var(--dp-glow-shadow) !important;
+}
+
+/* ── ANIMATION: boot sequence glow on connect ───────────────────────────── */
+@keyframes dp-boot-glow {
+  0%   { opacity: 0; text-shadow: none; }
+  30%  { opacity: 1; text-shadow: 0 0 20px var(--dp-cyber); }
+  70%  { opacity: 1; text-shadow: 0 0 8px var(--dp-cyber); }
+  100% { opacity: 1; text-shadow: none; }
+}
+
+.sidebar-network .header {
+  animation: dp-boot-glow 1.2s ease-out forwards;
+}
+
+/* ── FOOTER / STATUS BAR ────────────────────────────────────────────────── */
+#footer,
+.footer {
+  background: var(--dp-dark) !important;
+  border-top: 1px solid var(--dp-border) !important;
+  color: var(--dp-muted) !important;
+  font-family: var(--font-display) !important;
+  font-size: 0.55rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
