@@ -475,7 +475,80 @@ a:hover { color: #fff !important; text-decoration: underline !important; }
 
 .context-menu li.divider { border-top: 1px solid var(--border) !important; }
 
-/* ── SETTINGS WINDOW ─────────────────────────────────────────────────── */
+/* ── CONNECT WINDOW ──────────────────────────────────────────────────── */
+#connect.window,
+#connect .container {
+  background: var(--dim) !important;
+  color: var(--text) !important;
+  font-family: var(--font-mono) !important;
+}
+
+#connect .title {
+  font-family: var(--font-display) !important;
+  color: var(--green) !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+#connect h2 {
+  font-family: var(--font-mono) !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: var(--muted) !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+#connect .connect-row label {
+  color: var(--muted) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.08em !important;
+}
+
+#connect .input,
+#connect input[type="text"],
+#connect input[type="password"],
+#connect input:not([type="checkbox"]):not([type="submit"]) {
+  background: var(--panel) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.82rem !important;
+  border-radius: 0 !important;
+}
+
+#connect .input:focus,
+#connect input:focus {
+  border-color: var(--green2) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px var(--green2) !important;
+}
+
+#connect .input-wrap label {
+  color: var(--text) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.78rem !important;
+}
+
+#connect .btn[type="submit"] {
+  background: var(--dim) !important;
+  border: 1px solid var(--green2) !important;
+  color: var(--green) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  border-radius: 0 !important;
+  cursor: pointer !important;
+  transition: all 0.15s !important;
+}
+
+#connect .btn[type="submit"]:hover {
+  background: rgba(57,255,20,0.08) !important;
+  box-shadow: 0 0 8px rgba(57,255,20,0.3) !important;
+}
 #windows .window {
   background: var(--dim) !important;
   color: var(--text) !important;
